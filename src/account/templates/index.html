@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}VPN Service{% endblock %}</title>
+</head>
+<body>
+<h1>Welcome to the VPN Service</h1>
+
+{% if user.is_authenticated %}
+    <p>Hello, {{ user.first_name }}! You are logged in.</p>
+    <a href="{% url 'account:profile' %}">Go to your profile</a>
+
+    <form method="post" action="{% url 'account:logout' %}">
+        {% csrf_token %}
+        <button type="submit">logout</button>
+    </form>
+{% else %}
+    <p>You are not logged in.</p>
+    <a href="{% url 'account:login' %}">Login</a> |
+    <a href="{% url 'account:register' %}">Register</a>
+{% endif %}
+
+</body>
+</html>
