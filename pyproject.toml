@@ -11,6 +11,11 @@ python = "^3.11"
 black = "^24.8.0"
 psycopg2-binary = "^2.9.9"
 django = "^5.1"
+requests = "^2.32.3"
+lxml = "5.1.0"
+lxml-html-clean = "^0.2.0"
+websockets = "10.0"
+beautifulsoup4 = "^4.12.3"
 
 
 [build-system]
