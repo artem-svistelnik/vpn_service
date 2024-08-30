@@ -30,6 +30,11 @@ class User(AbstractUser):
     data_sent = models.BigIntegerField(default=0)
     data_received = models.BigIntegerField(default=0)
 
+    def update_data_usage(self, sent, received):
+        self.data_sent += sent
+        self.data_received += received
+        self.save(update_fields=["data_sent", "data_received"])
+
     objects = CustomUserManager()
 
     def __str__(self):

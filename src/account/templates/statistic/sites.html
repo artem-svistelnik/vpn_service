@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        tr:hover {
+            background-color: #686868;
+            color: #e5e5e5;
+            cursor: pointer;
+        }
+        .btn-visit {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #000000;
+            background-color: #00ff0f;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn-back {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #000000;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+    </style>
+    <title>{% block title %}Statistic{% endblock %}</title>
+</head>
+<body>
+<header>
+
+</header>
+
+{% block content %}
+
+    <a type="button" class="btn-visit"
+       href="{% url 'account:add-site' %}">Add new site</a>
+
+        <a type="button" class="btn-back"
+       href="{% url 'account:profile' %}">My Profile</a>
+
+    <br>
+    <table>
+        <tr>
+            <th>Site name</th>
+            <th>Url</th>
+            <th>visit_count</th>
+            <th>data_sent</th>
+            <th>data_received</th>
+        </tr>
+        {% for site in sites %}
+                <tr onclick="window.location.href='{% url 'account:site-details' site.id %}'">
+                    <td>{{ site.name }}</td>
+                    <td>{{ site.url }}</td>
+                    <td>{{ site.visit_count }}</td>
+                    <td>{{ site.data_sent }}</td>
+                    <td>{{ site.data_received }}</td>
+
+                </tr>
+        {% endfor %}
+    </table>
+
+    <h2>{{ user.username }} Full data statistic</h2>
+        <p>Sent data: {{ user.data_sent }}</p>
+        <p>Received data: {{ user.data_received }}</p>
+        <br>
+{% endblock %}
+</body>
+</html>

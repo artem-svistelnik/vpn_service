@@ -52,3 +52,6 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = "account:profile"
 LOGOUT_REDIRECT_URL = "account:login"
+CSRF_TRUSTED_ORIGINS = [
+    "https://786e-37-57-95-40.ngrok-free.app",
+]

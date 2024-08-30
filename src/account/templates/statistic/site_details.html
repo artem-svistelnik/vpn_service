@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Statistic{% endblock %}</title>
+    <style>
+        .btn-visit {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #e60000;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn-back {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #000000;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-visit:hover {
+            background-color: #cc0000;
+        }
+
+        .form-control {
+            width: 600px;
+            height: 14px;
+            padding: 8px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+
+        .readonly-field {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+<header>
+
+</header>
+
+{% block content %}
+    <a type="button" class="btn-visit"
+       href="{% url 'service:proxy-view' site_name=site.name path=site.url %}">Visit site</a>
+
+    <br>
+    <form method="post">
+        {% csrf_token %}
+        <label for="id_name">Name:</label>
+        <input type="text" name="name" id="id_name" value="{{ site.name }}" class="form-control">
+        <br>
+        <label for="id_url">URL:</label>
+        <input type="url" name="url" id="id_url" value="{{ site.url }}" class="form-control">
+        <br>
+        <p>Visit Count: <input type="text" value="{{ site.visit_count }}" class="readonly-field" readonly></p>
+        <p>Data Sent: <input type="text" value="{{ site.data_sent }}" class="readonly-field" readonly></p>
+        <p>Data Received: <input type="text" value="{{ site.data_received }}" class="readonly-field" readonly></p>
+        <button type="submit">Save changes</button>
+    </form>
+<a type="button" class="btn-back"
+       href="{% url 'account:sites' %}">Back to site list</a>
+
+
+{% endblock %}
+</body>
+</html>
